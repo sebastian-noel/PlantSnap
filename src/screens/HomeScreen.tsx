@@ -4,7 +4,7 @@ import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen() {
     const [facing, setFacing] = useState<CameraType>('back');
-  const [permission, requestPermission] = useCameraPermissions();
+    const [permission, requestPermission] = useCameraPermissions();
 
   if (!permission) {
     // Camera permissions are still loading.
