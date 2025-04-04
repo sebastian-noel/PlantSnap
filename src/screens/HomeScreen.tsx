@@ -4,7 +4,7 @@ import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen() {
     const [facing, setFacing] = useState<CameraType>('back');
-  const [permission, requestPermission] = useCameraPermissions();
+    const [permission, requestPermission] = useCameraPermissions();
 
   if (!permission) {
     // Camera permissions are still loading.
@@ -21,6 +21,10 @@ export default function HomeScreen() {
     );
   }
 
+  function takePicture(){
+    
+  }
+
   function toggleCameraFacing() {
     setFacing(current => (current === 'back' ? 'front' : 'back'));
   }
@@ -29,8 +33,8 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <CameraView style={styles.camera} facing={facing}>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-            <Text style={styles.text}>Flip Camera</Text>
+          <TouchableOpacity style={styles.button} onPress={takePicture}>
+            <Text style={styles.text}>Take Picture!</Text>
           </TouchableOpacity>
         </View>
       </CameraView>
