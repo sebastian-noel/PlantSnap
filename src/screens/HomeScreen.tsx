@@ -1,60 +1,69 @@
-import React from 'react';
-import { View, StyleSheet, Image, Text, SafeAreaView } from 'react-native';
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
+import { useState } from 'react';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen() {
+    const [facing, setFacing] = useState<CameraType>('back');
+  const [permission, requestPermission] = useCameraPermissions();
+
+  if (!permission) {
+    // Camera permissions are still loading.
+    return <View />;
+  }
+
+  if (!permission.granted) {
+    // Camera permissions are not granted yet.
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <Image
-                    source={require('../../assets/logo.png')}
-                    style={styles.logo}
-                    resizeMode="contain"
-                />
-            </View>
-            <View style={styles.content}>
-                <Text style={styles.welcomeText}>
-                    Welcome to LeafSnap AI
-                </Text>
-                <Text style={styles.descriptionText}>
-                    Your intelligent plant identification companion. Search for plants to learn more about them. (Photo feature coming soon!)
-                </Text>
-            </View>
-        </SafeAreaView>
+      <View style={styles.container}>
+        <Text style={styles.message}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
     );
+  }
+
+  function toggleCameraFacing() {
+    setFacing(current => (current === 'back' ? 'front' : 'back'));
+  }
+
+  return (
+    <View style={styles.container}>
+      <CameraView style={styles.camera} facing={facing}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+            <Text style={styles.text}>Flip Camera</Text>
+          </TouchableOpacity>
+        </View>
+      </CameraView>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
+      flex: 1,
+      justifyContent: 'center',
     },
-    header: {
-        backgroundColor: '#00E676',
-        height: 200,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: 20,
+    message: {
+      textAlign: 'center',
+      paddingBottom: 10,
     },
-    logo: {
-        width: '80%',
-        height: 120,
+    camera: {
+      flex: 1,
     },
-    content: {
-        flex: 1,
-        padding: 20,
-        alignItems: 'center',
+    buttonContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      backgroundColor: 'transparent',
+      margin: 64,
     },
-    welcomeText: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 16,
-        color: '#333',
-        textAlign: 'center',
+    button: {
+      flex: 1,
+      alignSelf: 'flex-end',
+      alignItems: 'center',
     },
-    descriptionText: {
-        fontSize: 16,
-        color: '#666',
-        textAlign: 'center',
-        lineHeight: 24,
+    text: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: 'white',
     },
-}); 
+  });

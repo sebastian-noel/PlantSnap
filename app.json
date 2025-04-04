@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Cursor-PlantID",
-    "slug": "leafsnap",
+    "slug": "plantsnap",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,6 +12,16 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "recordAudioAndroid": true
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -26,7 +36,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "0a012c7f-4de8-4adb-8957-2801b6986212"
+        "projectId": "3dd38350-ce4a-4c28-a3d3-1cabdbf795c9"
       }
     },
     "owner": "leafsnap"
