@@ -1,11 +1,11 @@
-import { CameraView, CameraType, useCameraPermissions, Camera } from 'expo-camera';
+import { CameraView, CameraType, useCameraPermissions, Camera, FlashMode } from 'expo-camera';
 import { Button, StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
 import * as medialibrary from 'expo-media-library';
-import { useRef } from 'react';
-
+import { useRef, useState } from 'react';
 
 export default function HomeScreen() {
     let cameraRef = useRef();
+    const [CamFlash, setCamFlash] = useState<FlashMode>('off')
     const [hasCamPerms, requestCamPermission] = useCameraPermissions();
     const [hasMediaLibPerms, requestMediaPermission] = medialibrary.usePermissions();
 
@@ -25,16 +25,13 @@ export default function HomeScreen() {
     );
   }
 
-
-function takePicture() {
-    if (cameraRef.current) {
-        console.log('Taking picture...');
-    }
-}
+  function takePicture() {
+    setCamFlash(current => (current === 'on' ? 'off' : 'on'));
+  }
 
   return (
     <View style={styles.container}>
-      <CameraView style={styles.camera} facing={'back'}>
+      <CameraView style={styles.camera} facing={'back'} >
         <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.galleryButton} onPress={takePicture}>
           <Image 
@@ -43,7 +40,7 @@ function takePicture() {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button} onPress={takePicture}>
+          <TouchableOpacity style={styles.button} onPress={()=>takePicture()}>
           <Image 
                 source={require('../../assets/PhotoButton.png')}
                 style={styles.galleryImage} 

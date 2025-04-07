@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
+    SafeAreaView
 } from 'react-native';
 import { useHistory, Plant } from '../context/HistoryContext';
 
@@ -111,7 +112,7 @@ export default function HistoryScreen() {
     }
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container} >
             <Text style={styles.title}>Search History</Text>
             {history.length > 0 ? (
                 <FlatList
@@ -126,14 +127,14 @@ export default function HistoryScreen() {
                     <Text style={styles.emptySubtext}>Your searched plants will appear here</Text>
                 </View>
             )}
-        </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: 'rgb(255, 255, 255)',
     },
     title: {
         fontSize: 24,

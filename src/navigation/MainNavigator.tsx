@@ -20,7 +20,7 @@ export default function MainNavigator() {
                         case 'History':
                             iconName = focused ? 'clock' : 'clock-outline';
                             break;
-                        case 'Home':
+                        case 'Scan':
                             iconName = focused ? 'home' : 'home-outline';
                             break;
                         case 'Search':
@@ -36,10 +36,10 @@ export default function MainNavigator() {
                 tabBarInactiveTintColor: 'gray',
                 headerShown: false,
             })}
-            initialRouteName="Home"
+            initialRouteName="Scan"
         >
             <Tab.Screen name="History" component={HistoryScreen} />
-            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Scan" component={HomeScreen} />
             <Tab.Screen name="Search" component={SearchScreen} />
         </Tab.Navigator>
     );

@@ -7,6 +7,7 @@ import {
     Image,
     StyleSheet,
     ScrollView,
+    SafeAreaView
 } from 'react-native';
 import { MOCK_PLANTS, useHistory, Plant } from '../context/HistoryContext';
 
@@ -69,7 +70,8 @@ export default function SearchScreen() {
     };
 
     return (
-        <ScrollView style={styles.container}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'rgb(255, 255, 255)' }}>
+            <ScrollView style={styles.container} bounces={true} alwaysBounceVertical={true} contentInsetAdjustmentBehavior="automatic">
             <View style={styles.searchContainer}>
                 <TextInput
                     style={styles.input}
@@ -120,6 +122,8 @@ export default function SearchScreen() {
                 </View>
             )}
         </ScrollView>
+        </SafeAreaView>
+        
     );
 }
 
